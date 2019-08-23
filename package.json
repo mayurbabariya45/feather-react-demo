@@ -1,0 +1,94 @@
+{
+  "name": "feather-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@feathersjs/client": "^3.7.8",
+    "@feathersjs/feathers": "^3.3.1",
+    "@feathersjs/socketio-client": "^1.2.1",
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/styles": "^4.3.3",
+    "classnames": "^2.2.6",
+    "nprogress": "^0.2.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-helmet": "^5.2.1",
+    "react-notification-system": "^0.2.17",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-devtools": "^3.5.0",
+    "redux-devtools-dock-monitor": "^1.1.3",
+    "redux-devtools-log-monitor": "^1.4.0",
+    "redux-form": "^8.2.6",
+    "redux-saga": "^1.0.5",
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.2.0",
+    "superagent": "^5.1.0",
+    "tinycolor2": "^1.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,scss,less}\"",
+    "eslint": "eslint --ext .js,jsx src",
+    "tslint": "tslint \"src/**/*.{ts,tsx}\"",
+    "stylelint": "stylelint \"src/**/*.{scss,less}\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,scss,less}": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{js,jsx}": [
+      "eslint"
+    ],
+    "src/**/*.{scss,less}": [
+      "stylelint"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.3",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "react-scripts": "3.1.1",
+    "stylelint": "^10.1.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-standard": "^18.3.0"
+  }
+}
