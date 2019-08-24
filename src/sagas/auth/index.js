@@ -34,6 +34,9 @@ export function* LOGIN({ payload }) {
       payload: loggedInTime,
     })
     yield put({
+      type: 'clock/LOAD_CURRENT_CLOCK',
+    })
+    yield put({
       type: 'user/LOAD_CURRENT_ACCOUNT',
       payload: success,
     })
