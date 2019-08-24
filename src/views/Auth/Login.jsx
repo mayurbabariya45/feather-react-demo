@@ -67,10 +67,10 @@ const validate = values => {
 export default withRouter(
   reduxForm({
     form: 'loginForm',
-    initialValues: {
-      username: 'JL20',
-      password: 'hello123',
-    },
+    // initialValues: {
+    //   username: 'JL20',
+    //   password: 'hello123',
+    // },
     validate,
   })(Login),
 )

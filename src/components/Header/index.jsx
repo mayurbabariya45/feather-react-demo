@@ -25,7 +25,7 @@ const Header = ({ auth, dispatch }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          Demo App Clock
+          App Clock
         </Typography>
         {isUserAuthorized && (
           <IconButton color="inherit" onClick={handleClick}>
