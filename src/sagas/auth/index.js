@@ -13,7 +13,7 @@ export function* LOGIN({ payload }) {
   })
   const success = yield call(callLogin, payload)
   if (success) {
-    if (!Number.isInteger(success)) {
+    if (String(success).trim() === 'FAIL') {
       addNotification({
         message: 'Something is wrong with your login or password :(',
         level: notificationStates.error,

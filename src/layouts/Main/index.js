@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import useStyles from './styles'
 import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+// import Footer from '../../components/Footer'
 
 const Main = ({ children }) => {
   const classes = useStyles()
@@ -10,7 +10,7 @@ const Main = ({ children }) => {
     <div className={classes.root}>
       <Header />
       <div className={classes.content}>{children}</div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

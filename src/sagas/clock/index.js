@@ -13,6 +13,12 @@ export function* CLOCKIN({ payload }) {
   const boxSuccess = yield call(getBoxID, { getBoxId: true, barcode: payload.barcode })
   if (boxSuccess) {
     if (!Number.isInteger(boxSuccess)) {
+      yield put({
+        type: 'clock/SET_STATE',
+        payload: {
+          loading: false,
+        },
+      })
       addNotification({
         message: 'Something is wrong with your barcode :(',
         level: notificationStates.error,
@@ -26,14 +32,30 @@ export function* CLOCKIN({ payload }) {
       userId,
       boxId: boxSuccess,
     })
-    if (success) {
+    if (String(success).trim() === 'PASS') {
+      yield put({
+        type: 'clock/SET_STATE',
+        payload: {
+          loading: false,
+        },
+      })
       yield put({
         type: 'clock/LOAD_CURRENT_CLOCK',
-        payload: success,
       })
       addNotification({
         message: 'Clock has been started',
         level: notificationStates.success,
+      })
+    } else if (String(success).trim() === 'FAIL') {
+      yield put({
+        type: 'clock/SET_STATE',
+        payload: {
+          loading: false,
+        },
+      })
+      addNotification({
+        message: 'Something is wrong with your clock in :(',
+        level: notificationStates.error,
       })
     }
   }
@@ -48,7 +70,7 @@ export function* CLOCKOUT({ payload }) {
   })
   const userId = Number(localStorage.getItem('userID')) || ''
   const success = yield call(callClockOut, { ...payload, clockOut: true, userId })
-  if (success) {
+  if (String(success).trim() === 'PASS') {
     yield put({
       type: 'clock/LOAD_CURRENT_CLOCK',
       payload: success,
@@ -56,6 +78,17 @@ export function* CLOCKOUT({ payload }) {
     addNotification({
       message: 'Clock has been stopped',
       level: notificationStates.success,
+    })
+  } else if (String(success).trim() === 'FAIL') {
+    yield put({
+      type: 'clock/SET_STATE',
+      payload: {
+        loading: false,
+      },
+    })
+    addNotification({
+      message: 'Something is wrong with your clock out :(',
+      level: notificationStates.error,
     })
   }
 }

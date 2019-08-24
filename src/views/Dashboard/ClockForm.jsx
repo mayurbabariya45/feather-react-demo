@@ -17,7 +17,7 @@ const normalizeBarCode = value => {
   if (onlyNums.length <= 7) {
     return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3)}`
   }
-  return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 15)}`
+  return `${onlyNums.slice(0, 3)}-${onlyNums.slice(3, 6)}-${onlyNums.slice(6, 13)}`
 }
 const ClockForm = ({ tasks, isLoading, handleSubmit, onSubmit }) => {
   const classes = useStyles()
@@ -90,7 +90,6 @@ const validate = values => {
     errors.barcode = 'Invalid barcode, must be 12 digits'
   } else if (
     values.barcode.length >= 15 &&
-    values.barcode.length <= 16 &&
     !/^([0-9]{3}[-][0-9]{3}[-][0-9]{7})$/i.test(values.barcode)
   ) {
     errors.barcode = 'Invalid barcode, must be 13 digits'
