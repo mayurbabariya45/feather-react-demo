@@ -9,7 +9,7 @@ const Login = ({ children }) => {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <Typography className={classes.logotypeText}>Web Application</Typography>
+        <Typography className={classes.logotypeText}>App Clock</Typography>
       </div>
       {children}
       <Footer />
