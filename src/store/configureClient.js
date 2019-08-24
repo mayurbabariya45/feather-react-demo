@@ -9,10 +9,13 @@ const app = feathers()
 
 // Set up Socket.io client with the socket
 // And a timeout of 2 seconds
-app.configure(
-  socketio(socket, {
-    timeout: 20000,
-  }),
-)
-
-export default app
+export default (function configureClient() {
+  app.configure(
+    socketio(socket, {
+      transports: ['websocket'],
+      forceNew: true,
+      timeout: 20000,
+    }),
+  )
+  return app
+})()

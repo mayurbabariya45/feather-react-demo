@@ -3,11 +3,19 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import Routes from '../routes'
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Routes />
-  </Provider>
-)
+const Root = ({ store }) => {
+  React.useEffect(() => {
+    store.dispatch({
+      type: 'INITIALIZE_WEB_SOCKETS_CHANNEL',
+    })
+    return () => {}
+  })
+  return (
+    <Provider store={store}>
+      <Routes />
+    </Provider>
+  )
+}
 
 Root.propTypes = {
   store: PropTypes.objectOf(PropTypes.any),

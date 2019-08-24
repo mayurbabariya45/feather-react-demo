@@ -8,16 +8,24 @@ import Routes from '../routes'
 import Themes from '../themes'
 import Notification from '../components/Notification'
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <ThemeProvider theme={Themes.default}>
-      <CssBaseline />
-      <Routes />
-      <Notification />
-    </ThemeProvider>
-    <DevTools />
-  </Provider>
-)
+const Root = ({ store }) => {
+  React.useEffect(() => {
+    store.dispatch({
+      type: 'INITIALIZE_WEB_SOCKETS_CHANNEL',
+    })
+    return () => {}
+  })
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={Themes.default}>
+        <CssBaseline />
+        <Routes />
+        <Notification />
+      </ThemeProvider>
+      <DevTools />
+    </Provider>
+  )
+}
 
 Root.propTypes = {
   store: PropTypes.objectOf(PropTypes.any),

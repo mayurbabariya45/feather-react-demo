@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Root from './root/Root'
 import * as serviceWorker from './serviceWorker'
-import store from './store/configureStore'
+import configureStore from './store/configureStore'
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'))
+ReactDOM.render(<Root store={configureStore} />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
