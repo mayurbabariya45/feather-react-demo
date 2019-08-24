@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet'
 import LoginLayout from './Login'
 import PublicLayout from './Public'
 import MainLayout from './Main'
+import Loader from '../components/Loader'
 
 const Layouts = {
   public: PublicLayout,
@@ -49,7 +50,7 @@ class IndexLayout extends Component {
     const isLoginLayout = getLayout() === 'login'
     const BootstrappedLayout = () => {
       if (isUserLoading && !isUserAuthorized && !isLoginLayout) {
-        return <div>Loding....</div>
+        return <Loader />
       }
       if (!isLoginLayout && !isUserAuthorized) {
         return <Redirect to="/auth/login" />

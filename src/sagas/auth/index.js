@@ -2,6 +2,7 @@ import { all, takeEvery, put, call } from 'redux-saga/effects'
 import { addNotification, notificationStates } from '../../components/Notification'
 import { callLogin, callProdTask, callStates } from './api'
 import actions from '../../actions/Auth/actionCreators'
+import { SESSION_TIMEOUT } from '../../config/constants'
 
 export function* LOGIN({ payload }) {
   yield put({
@@ -17,9 +18,21 @@ export function* LOGIN({ payload }) {
         message: 'Something is wrong with your login or password :(',
         level: notificationStates.error,
       })
+      yield put({
+        type: 'user/SET_STATE',
+        payload: {
+          loading: false,
+        },
+      })
       return false
     }
+    const loggedInTime = new Date().getTime() + SESSION_TIMEOUT * 60 * 60 * 1000
     localStorage.setItem('userID', success)
+    localStorage.setItem('loggedInTime', loggedInTime)
+    yield put({
+      type: 'user/START',
+      payload: loggedInTime,
+    })
     yield put({
       type: 'user/LOAD_CURRENT_ACCOUNT',
       payload: success,
@@ -29,6 +42,7 @@ export function* LOGIN({ payload }) {
 
 export function* LOGOUT() {
   localStorage.removeItem('userID')
+  localStorage.removeItem('loggedInTime')
   yield put({
     type: 'user/SET_STATE',
     payload: {
@@ -46,6 +60,12 @@ export function* LOAD_CURRENT_ACCOUNT({ payload }) {
       loading: true,
     },
   })
+  const loggedInTime = Number(localStorage.getItem('loggedInTime') || 0)
+  const currentTime = new Date().getTime()
+  if (loggedInTime > 0 && currentTime >= loggedInTime) {
+    yield put({ type: 'user/LOGOUT' })
+    return false
+  }
   if (!Number.isInteger(payload) || payload === null) {
     yield put({
       type: 'user/SET_STATE',
@@ -71,6 +91,9 @@ export function* LOAD_CURRENT_ACCOUNT({ payload }) {
         tasks,
         states,
       },
+    })
+    yield put({
+      type: 'timer/START',
     })
   }
 }

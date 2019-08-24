@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import IndexLayout from '../layouts'
 import NotFoundPage from '../views/404'
+import Loader from '../components/Loader'
 
 const Login = lazy(() => import('../containers/AuthContainer/LoginContainer'))
 const Dashboard = lazy(() => import('../containers/DashboardContainer'))
@@ -27,7 +28,7 @@ const appRoutes = [
 const Router = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <IndexLayout>
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/auth/login" />} />

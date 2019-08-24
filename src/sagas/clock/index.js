@@ -31,6 +31,10 @@ export function* CLOCKIN({ payload }) {
         type: 'clock/LOAD_CURRENT_CLOCK',
         payload: success,
       })
+      addNotification({
+        message: 'Clock has been started',
+        level: notificationStates.success,
+      })
     }
   }
 }
@@ -42,24 +46,23 @@ export function* CLOCKOUT({ payload }) {
       loading: true,
     },
   })
-  console.log('====================================')
-  console.log(payload)
-  console.log('====================================')
   const userId = Number(localStorage.getItem('userID')) || ''
   const success = yield call(callClockOut, { ...payload, clockOut: true, userId })
   if (success) {
-    console.log('====================================')
-    console.log(success)
-    console.log('====================================')
     yield put({
       type: 'clock/LOAD_CURRENT_CLOCK',
       payload: success,
+    })
+    addNotification({
+      message: 'Clock has been stopped',
+      level: notificationStates.success,
     })
   }
 }
 
 export function* LOAD_CURRENT_CLOCK() {
   const userId = Number(localStorage.getItem('userID')) || ''
+  if (!Number.isInteger(userId)) return false
   const response = yield call(getClockInfo, { clockInfo: true, userId })
   if (response) {
     const clockSplit = response.trim().split(':')
@@ -68,7 +71,8 @@ export function* LOAD_CURRENT_CLOCK() {
       clock = {
         boxId: clockSplit[0],
         barcode: clockSplit[1],
-        state: clockSplit[5].split('^').shift(),
+        currentTime: `${clockSplit[2]} ${clockSplit[3]}:${clockSplit[4]}`,
+        state: clockSplit[clockSplit.length - 1].split('^').shift(),
         comment: clockSplit[clockSplit.length - 1].split('^').shift(),
       }
     }

@@ -3,6 +3,7 @@ const actions = {
   LOGIN: 'user/LOGIN',
   LOAD_CURRENT_ACCOUNT: 'user/LOAD_CURRENT_ACCOUNT',
   LOGOUT: 'user/LOGOUT',
+  START: 'user/START',
 }
 
 export default actions

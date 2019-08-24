@@ -7,4 +7,5 @@ export default makeStyles(theme => ({
     alignItems: 'flex-start',
     marginTop: theme.spacing(2),
   },
+  clockInfoContainer: {},
 }))
