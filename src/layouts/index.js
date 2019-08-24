@@ -63,7 +63,7 @@ class IndexLayout extends Component {
 
     return (
       <>
-        <Helmet titleTemplate="Demo App" />
+        <Helmet titleTemplate="RealTime App Clock" />
         {BootstrappedLayout()}
       </>
     )

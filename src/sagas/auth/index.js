@@ -61,6 +61,7 @@ export function* LOAD_CURRENT_ACCOUNT({ payload }) {
     type: 'user/SET_STATE',
     payload: {
       loading: true,
+      authorized: true,
     },
   })
   const loggedInTime = Number(localStorage.getItem('loggedInTime') || 0)
