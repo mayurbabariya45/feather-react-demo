@@ -1,7 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from '@material-ui/styles'
+import { CssBaseline } from '@material-ui/core'
+import Notification from '../components/Notification'
 import Routes from '../routes'
+import Themes from '../themes'
 
 const Root = ({ store }) => {
   React.useEffect(() => {
@@ -12,7 +16,11 @@ const Root = ({ store }) => {
   })
   return (
     <Provider store={store}>
-      <Routes />
+      <ThemeProvider theme={Themes.default}>
+        <CssBaseline />
+        <Routes />
+        <Notification />
+      </ThemeProvider>
     </Provider>
   )
 }
