@@ -235,7 +235,7 @@ export const style = {
 
 export const addNotification = props => {
   const properties = {
-    uid: Math.random(10000),
+    uid: Math.random(1),
     message: 'Notification message',
     level: 'success',
     position: 'tc',
